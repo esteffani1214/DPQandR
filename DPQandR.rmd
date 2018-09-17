@@ -1,0 +1,81 @@
+---
+title: "D_P_Q_R of distributions"
+author: "Dr K"
+date: "September 17, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview of R's distribution functions
+
+R has over 40 distribution functions 
+
+### Description
+
+Density, cumulative distribution function, quantile function and random variate generation for many standard probability distributions are available in the stats package.
+
+### Details
+
+The functions for the density/mass function, cumulative distribution function, quantile function and random variate generation are named in the form dxxx, pxxx, qxxx and rxxx respectively.  
+
+### example using a normal distribution
+
+#### Consider a normal distribution with mean 100 and standard deviaion 25  
+
+we will create an array of x values from 0 to 200 with 2000 points in it.
+
+```{r}
+xval=seq(from=0,to=200,by=0.1)
+```
+Now we will apply dnorm to that array
+
+```{r}
+yvald=dnorm(xval,mean=100,sd=25)
+```
+Now let's plot the array 
+
+
+```{r}
+plot(xval,yvald)
+```
+  
+  
+### what does pnorm do
+
+```{r}
+yvalp=pnorm(xval,mean=100,sd=25)
+```
+
+```{r}
+plot(xval,yvalp)
+```
+
+#### So p gives us the cumulative distribution function  
+
+if we want to know the area under the curve to the left of x=103  
+
+```{r}
+pnorm(103,mean=100,sd=25)
+```
+### what does qnorm do ?  
+
+qnorm gives us the quantiles we send in probabilities and it gives back x-values with those probabilities.   
+
+suppose we want to know the x's where the probability is .25,.5,.75 and .8  
+
+```{r}
+probs=c(.25,.5,.75,.8)
+qnorm(probs,mean=100,sd=25)
+```
+### finally what does rnorm do???
+
+it takes a random sample of a specified size from the distribution  
+
+```{r}
+rsamp= rnorm(n=50,mean=100,sd=25)
+hist(rsamp)
+```
+
