@@ -79,3 +79,194 @@ rsamp= rnorm(n=50,mean=100,sd=25)
 hist(rsamp)
 ```
 
+## Now lets change from the normal distribution to the chi-squared distribution 
+## there is just one parameter for such a distribution - df -- the degrees of freedom
+
+```{r}
+yvald=dchisq(xval,df=3) # 3 Deg of freedom
+```
+Now let's plot the array 
+
+
+```{r}
+plot(xval,yvald)
+```
+
+```{r}
+yvald2=dchisq(xval,df=10) # 10 Deg of freedom
+```
+
+```{r}
+plot(xval,yvald2)
+```
+```{r}
+yvald3=dchisq(xval,df=30) # 30 Deg of freedom
+```
+
+```{r}
+plot(xval,yvald3)
+```
+
+### we are going to plot Chi_Squared distributions degrees of Freedom go 3,10,15,25,30,50
+
+
+```{r}
+base=seq(from=0,to=100,by=.02)
+chi3=dchisq(base,df=3)
+chi10=dchisq(base,df=10)
+chi15=dchisq(base,df=15)
+chi25=dchisq(base,df=25)
+chi30=dchisq(base,df=30)
+chi50=dchisq(base,df=50)
+plot(base,chi3,type="l")
+title(main="Chi_Square plots \n Deg of freedom from 3 to 50")
+lines(base,chi10,type="l",col=2)
+lines(base,chi15,type="l",col=3)
+lines(base,chi25,type="l",col=4)
+lines(base,chi30,type="l",col=5)
+lines(base,chi50,type="l",col=6)
+
+```
+  
+## Now suppose the question Relates to a chisq distribution with 30 deg of freedom
+## and the question is "at what value of x is the area under the curve (from the left up to the point) equal to .75?" 
+## recall the area under any distribution function is always 1.
+
+```{r}
+plot(base,chi30,type="l",col=5)
+abline(v=qchisq(p=.75,df=30))
+print(qchisq(p=.75,df=30))
+```
+
+## Now suppose we want to know what area is to the left of the point 40 on the distribution function of chisq with 30 Deg of freedom.  
+
+```{r}
+plot(base,chi30,type="l",col=5)
+abline(v=40)
+print(pchisq(q=40,df=30))
+```
+## Now let us talk about the binomial distribution function, the whole idea goes like this -- we know the probability of getting say one bad apple, let's say that is .5 (or 50%).  Suppose we have a box of 100 apples, what's the probability of getting 0, 1, 2, ... ,99, 100 bad apples  
+
+
+using and plotting binomial distributions
+
+```{r}
+par(mfrow=c(1,2))
+x=0:100
+p.5=dbinom(x,size=100,prob=.5)
+plot(x,p.5,type="l",main="dbinom \n p=.5")
+z.5=pbinom(x,size=100,prob=.5)
+plot(x,z.5,type="l",main="pbinom \n p=.5")
+par(mfrow=c(1,1))
+```
+
+Lets change p to .2
+
+```{r}
+par(mfrow=c(1,2))
+x=0:100
+p.2=dbinom(x,size=100,prob=.2)
+plot(x,p.2,type="l",main="dbinom \n p=.2")
+z.2=pbinom(x,size=100,prob=.2)
+plot(x,z.2,type="l",main="pbinom \n p=.2")
+par(mfrow=c(1,1))
+```
+
+Lets change p to .8
+
+```{r}
+par(mfrow=c(1,2))
+x=0:100
+p.8=dbinom(x,size=100,prob=.8)
+plot(x,p.8,type="l",main="dbinom \n p=.8")
+z.8=pbinom(x,size=100,prob=.8)
+plot(x,z.8,type="l",main="pbinom \n p=.8")
+par(mfrow=c(1,1))
+```
+
+let's compute the mean when p=.5
+
+```{r}
+x=0:100
+p.5=dbinom(x,size=100,prob=.5)
+data.5=x*p.5
+mean.5=sum(data.5)
+mean.5
+```
+
+let's compute the mean when p=.2
+
+```{r}
+x=0:100
+p.2=dbinom(x,size=100,prob=.2)
+data=x*p.2
+mean.2=sum(data)
+mean.2
+```
+
+how about the mean when p=.8
+
+```{r}
+x=0:100
+p.8=dbinom(x,size=100,prob=.8)
+data.8=x*p.8
+mean.8=sum(data.8)
+mean.8
+```
+## so a random variable with a size=n and prob=p  
+## has a mean of n*p  
+
+# how about variance or standard deviation?
+
+```{r}
+x=0:100
+p.5=dbinom(x,size=100,prob=.5)
+data.5=x*p.5
+mean.5=sum(data.5)
+#now center x by subtracting mean from each element
+cx.5=x-mean.5
+#and now sum the squared centered x's times their probabilities
+var.5=sum(cx.5^2*p.5)
+sd.5=sqrt(var.5)
+var.5
+sd.5
+```
+Let' see about our other two (p=.2 and p=.8)
+```{r}
+x=0:100
+p.2=dbinom(x,size=100,prob=.2)
+data.2=x*p.2
+mean.2=sum(data.2)
+#now center x by subtracting mean from each element
+cx.2=x-mean.2
+#and now sum the squared centered x's times their probabilities
+var.2=sum(cx.2^2*p.2)
+sd.2=sqrt(var.2)
+var.2
+sd.2
+```
+
+## now for p=.8
+
+```{r}
+x=0:100
+p.8=dbinom(x,size=100,prob=.8)
+data.8=x*p.8
+mean.8=sum(data.8)
+#now center x by subtracting mean from each element
+cx.8=x-mean.8
+#and now sum the squared centered x's times their probabilities
+var.8=sum(cx.8^2*p.8)
+sd.8=sqrt(var.8)
+var.8
+sd.8
+```
+## now check against these formula's
+
+### $mean = n*p$
+
+### $standard deviation = \sqrt(n*p*q)$
+
+
+
+
