@@ -1,7 +1,7 @@
 ---
 title: "D_P_Q_R of distributions"
-author: "Dr K"
-date: "September 17, 2018"
+author: "Esteffani Maldonado"
+date: "September 28, 2021"
 output: html_document
 ---
 
